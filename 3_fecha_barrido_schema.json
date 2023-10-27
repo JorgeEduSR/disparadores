@@ -1,0 +1,27 @@
+[
+    {
+        "type": "STRING",
+        "name": "CUENTA_SAT",
+        "descritpion":"field_description"
+    },
+    {
+        "type": "STRING",
+        "name": "FECHA_BARRIDO",
+        "descritpion":"field_description"
+    },
+    {
+        "type": "STRING",
+        "name": "ESTATUS_BC",
+        "descritpion":"field_description"
+    },
+    {
+        "type": "STRING",
+        "name": "FILE_DATE",
+        "descritpion":"field_description"
+    },
+    {
+        "type": "STRING",
+        "name": "LAST_UPDATE",
+        "descritpion":"field_description"
+    }
+]

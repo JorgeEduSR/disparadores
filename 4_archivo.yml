@@ -1,0 +1,37 @@
+source: 
+adress: "sftp:falabella..." # Depende de cambio para procesamiento.
+csv: 
+	separator: '|' # Depende si esta separado por comillas o |
+	quotechar: '"'
+	escapechar: '' # Todo el archivo no cambiara.
+extractor:
+	type:sftp
+	job_image: sftp-extractor-corp
+	job_namespace: dmr-mx-prod # No cambia
+env: ....
+	key: "Files regex"
+	value: Batch_CPPS_.*.txt # Se le pone * para incluir la fecha de los archivos,
+# ademas de que es un archivo en regex.
+gcp: 
+	...
+	gcs:
+		ln:
+			bucket: 'ldn_fif_cmr_mx_disparadores' # Carpeta donde nos va a llegar los archivos
+			# Airflow mueve de ldn hacia raw.
+		raw: 
+			bucket: 'raw_fif_cmr_mx_disparadores' # Tabla intermedia sale de aqui 
+composer:
+	extraction:
+			scheduling:
+					...
+						email_on_failure: 'micorreo@gmail.com'
+bigquery:
+	raw:
+		raw_dataset: 'nombre_del_archivo'
+		...
+		raw_table: 'nombre_de_la_tabla'
+		raw_schema: '\Disparador de prueba\fecha_barrido_schema.json' # ubicacion archivo .json con nombre de las columnas de la tabla intermedia
+		# Se realiza mapeo de el archivo que se esta recibiendo y lo que va a cargar
+		raw_skip_lines: 1 # Realizar salto de encabezado = 1, no realizarlo = 0.
+	trf:
+		trf_query: \Disparador de prueba\insert_fecha_barrido.sql' # Ubiacion de insert que creamos
